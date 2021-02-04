@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div
+  form(action='/add-habit', method='post')
+    label(for='habit')
+       input(id='habit', type='text', placeholder='Add a habit', name="habit")
+    br
+    br
+    div
+      input(type='submit',value='Submit')
