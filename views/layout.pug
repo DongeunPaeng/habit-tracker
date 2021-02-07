@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/stylesheets/style.css")
+  body
+    block content
+    p= message
+    script(
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    )
+    script(src="/javascripts/index.js")
+    if (habit)
+      script.
+        const habit = '#{habit}';
+        const nextYear = new Date().getFullYear() + 1;
+
+        const myCalender = new CalendarPicker('#myCalendarWrapper', {
+          min: new Date(),
+          max: new Date(nextYear, 10),
+        });
+
+        myCalender.onValueChange((currentValue) => {
+          const year = currentValue.getFullYear();
+          const month = currentValue.getMonth() + 1;
+          const date = currentValue.getDate();
+          const url = 'add-date';
+          const data = { year, month, date, habit };
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.text())
+            .then((data) => {
+              console.log('Success:', data);
+            })
+            .catch((error) => {
+              console.log('Error:', error);
+            });
+        });

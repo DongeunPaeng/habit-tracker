@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  a#home(href="/")
+    h1 #{title}
+
+  form(id="submitForm", action="/add-habit", method="post")
+    label(for="habit")
+      input#habit(type="text", placeholder="Add a habit", name="habit")
+      input(type="submit", value="Add")
+
+  br
+
+  .dropdown
+    button.dropbtn(onclick="myFunction()") My Habits
+    #myDropdown.dropdown-content
+      if (results)
+        each type in results
+          a(href=`/?habit=${type.habit}`)= type.habit
+
+  br
+  br
+
+  if (habit)
+    .calendarTitle
+      h1#calendarTitle #{habit}
+      .buttons
+        button#calendarChangeButton 수정
+        button#calendarDeleteButton 삭제
+    #showcase-wrapper
+      #myCalendarWrapper

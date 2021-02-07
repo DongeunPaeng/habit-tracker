@@ -1,7 +1,8 @@
 - [x] CREATE
-- [ ] READ
-- [ ] UPDATE
-  - [ ] Change name
-  - [ ] Check
-- [ ] DELETE
-- [ ] Brief ideation on view
+- [x] READ
+- [x] UPDATE
+  - [x] Change name
+  - [x] Check
+- [x] DELETE
+- [x] Brief ideation on view
+- [ ] Store data in localstorage for users
