@@ -19,7 +19,7 @@ You can also clone this repository and customize easily, with steps below:
 $ git clone
 
 # Go into the repository
-$ cd habit_tracker
+$ cd habit-tracker
 
 # Create Environment Variables
 $ touch .env
