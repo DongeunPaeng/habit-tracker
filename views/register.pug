@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  a#home(href="/")
+    h1 #{title}
+
+  form(action="/register", method="POST")
+    input#username(placeholder="ID", type="text", name="id")
+    input#password(placeholder="Password", type="password", name="password")
+    input#password2(
+      placeholder="Password check",
+      type="password",
+      name="password2"
+    )
+
+    br
+    br
+
+    input#registerButton(type="submit", value="회원가입")

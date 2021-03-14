@@ -1,10 +1,21 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: rgb(142, 142, 147);
 }
 
 a {
     color: #00b7ff;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 2em;
+    font-size: 12px;
 }
 
 a#home {
@@ -78,7 +89,7 @@ a#home {
     margin: 0.4em;
     padding: 1em 0.2em;
     width: 90%;
-    background-color: rgba(108, 108, 108, 0.02);
+    background-color: rgb(209, 209, 214);
     border-radius: 3px;
     border: 2px solid transparent;
     transition: box-shadow 200ms, border 100ms;
@@ -87,14 +98,14 @@ a#home {
 }
 
 #calendar #calendar-grid time.colored {
-    background-color: tomato;
+    background-color: rgb(100, 210, 255);
     color: white;
 }
 
 #calendar #calendar-grid time.selected,
 #calendar #calendar-grid time.selected:focus {
     outline: none;
-    border: 2px solid #c64949;
+    border: 2px solid rgb(10, 132, 255);
     box-sizing: inherit;
 }
 
@@ -145,7 +156,7 @@ a#home {
 }
 
 #calendarTitle {
-    color: tomato;
+    color: rgb(100, 210, 255);
 }
 
 #calendarChangeButton {

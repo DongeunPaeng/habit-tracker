@@ -5,11 +5,12 @@ html
     link(rel="stylesheet", href="/stylesheets/style.css")
   body
     block content
-    p= message
+    p#message= message
     script(
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
     )
     script(src="/javascripts/index.js")
+    script(src="/javascripts/login.js")
     if (habit)
       script.
         const habit = '#{habit}';
@@ -35,9 +36,10 @@ html
           })
             .then((response) => response.text())
             .then((data) => {
-              console.log('Success:', data);
+              // console.log('Success:', data);
             })
             .catch((error) => {
               console.log('Error:', error);
             });
         });
+    footer Copyright 2020 Habit Tracker. All rights reserved.

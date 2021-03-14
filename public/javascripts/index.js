@@ -29,13 +29,13 @@ class CalendarPicker {
         this.calendarGrid = document.createElement("section");
         this.calendarDayElementType = "time";
         this.listOfAllDaysAsText = [
+            "Sun",
             "Mon",
             "Tue",
             "Wed",
             "Thu",
             "Fri",
             "Sat",
-            "Sun",
         ];
         this.listOfAllMonthsAsText = [
             "Jan",
@@ -51,6 +51,20 @@ class CalendarPicker {
             "Nov",
             "Dec",
         ];
+        this.monthToNumber = {
+            Jan: 1,
+            Feb: 2,
+            Mar: 3,
+            Apr: 4,
+            May: 5,
+            Jun: 6,
+            Jul: 7,
+            Aug: 8,
+            Sep: 9,
+            Oct: 10,
+            Nov: 11,
+            Dec: 12,
+        };
 
         this.calendarWrapper.id = "calendar-wrapper";
         this.calendarElement.id = "calendar";
@@ -188,10 +202,8 @@ class CalendarPicker {
         let arrayOfDays = this._getDaysInMonth(this.month, this.year);
         let firstDayOfMonth = arrayOfDays[0].getDay();
 
-        firstDayOfMonth = firstDayOfMonth === 0 ? 7 : firstDayOfMonth;
-
-        if (1 < firstDayOfMonth) {
-            arrayOfDays = Array(firstDayOfMonth - 1)
+        if (0 < firstDayOfMonth) {
+            arrayOfDays = Array(firstDayOfMonth)
                 .fill(false, 0)
                 .concat(arrayOfDays);
         }
@@ -201,15 +213,14 @@ class CalendarPicker {
         const arrayOutput = await fetch(`/get-date/?habit=${query}`)
             .then((res) => res.json())
             .then((data) => data.dates);
-
-        const yearsArray = arrayOutput.map((row) => row.year);
-        const monthsArray = arrayOutput.map((row) => row.month);
-        const datesArray = arrayOutput.map((row) => row.date);
+        const theDate = arrayOutput.map(
+            (row) => row.year + "-" + row.month + "-" + row.date
+        );
 
         arrayOfDays.forEach((date) => {
-            const recurringYear = date.getFullYear();
-            const recurringMonth = date.getMonth() + 1;
-            const recurringDate = date.getDate();
+            const recurringYear = date ? date.getFullYear() : null
+            const recurringMonth = date ? date.getMonth() + 1 : null
+            const recurringDate = date ? date.getDate() : null
 
             let dateElement = document.createElement(
                 date ? this.calendarDayElementType : "span"
@@ -218,10 +229,9 @@ class CalendarPicker {
             let dateIsTheCurrentValue =
                 this.value.toString() === date.toString();
             if (dateIsTheCurrentValue) this.activeDateElement = dateElement;
-            let dateShouldBeColored =
-                yearsArray.includes(recurringYear) &&
-                monthsArray.includes(recurringMonth) &&
-                datesArray.includes(recurringDate);
+            let dateShouldBeColored = theDate.includes(
+                recurringYear + "-" + recurringMonth + "-" + recurringDate
+            );
 
             if (dateShouldBeColored) dateElement.classList.add("colored");
 

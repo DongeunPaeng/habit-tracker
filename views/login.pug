@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  a#home(href="/")
+    h1 #{title}
+
+  form(action="/login", method="POST")
+    input#username(placeholder="ID", type="text", name="id")
+    input#password(placeholder="Password", type="password", name="password")
+    input#loginButton(type="submit", value="로그인")
+
+  br
+
+  a(href="/register")
+    button 회원가입
