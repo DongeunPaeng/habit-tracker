@@ -199,10 +199,22 @@ router.post("/add-date", function (req, res, next) {
       const isChecked = checkResults[0];
       if (isChecked) {
         if (isChecked.deleted != 1) {
-          await connection.query(cancelQuery, [habit_id, year, month, date, user]);
+          await connection.query(cancelQuery, [
+            habit_id,
+            year,
+            month,
+            date,
+            user,
+          ]);
           return;
         }
-        await connection.query(recoverQuery, [habit_id, year, month, date, user]);
+        await connection.query(recoverQuery, [
+          habit_id,
+          year,
+          month,
+          date,
+          user,
+        ]);
         return;
       }
       await connection.query(postQuery, [habit_id, year, month, date, user]);
@@ -238,6 +250,10 @@ router.post("/change", function (req, res, next) {
     body: { query: habit, newHabitName },
     session: { user },
   } = req;
+  if (newHabitName === null) {
+    res.redirect("/");
+    return;
+  }
   try {
     const postQuery = `update habits set habit = ? where user_id = ? and habit = ?`;
     query((connection) => {
