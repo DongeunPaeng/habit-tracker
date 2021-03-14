@@ -1,3 +1,8 @@
+# TODO
+- [ ] Change session store to remote database.
+- [ ] Build a remote database on aws.
+- [ ] Deploy the service on Heroku.
+
 # Habit Tracker
 A super-simple habit tracker for minimalists.
 

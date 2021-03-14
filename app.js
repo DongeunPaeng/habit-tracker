@@ -4,8 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const session = require("express-session");
-// FIXME: change storing systeem.
-const FileStore = require("session-file-store")(session);
+const MongoStore = require("connect-mongo");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -29,7 +28,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    store: new FileStore(),
+    store: MongoStore.create({ mongoUrl: process.env.DB_MONGO_URL }),
   })
 );
 
